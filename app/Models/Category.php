@@ -33,7 +33,7 @@ class Category extends Model
         $allowIcluded = collect($this->allowIncluded);
 
         foreach ($relations as $key => $relationsShip) { 
-            // contains: if relationsSHip is in allowIncluded, in this case the condition is if isn't inside relationShip 
+            // contains: if relationsSHip is in allowIncluded, in this case the condition is if isn't inside relationShip
             if(!$allowIcluded->contains($relationsShip)){
                 //unset(array[key])
                 unset($relations[$key]);
