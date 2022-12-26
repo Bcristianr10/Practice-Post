@@ -28,6 +28,7 @@ class Category extends Model
         if(empty($this->allowIncluded) ||empty(request('included'))){
             return;                 
         }
+        //explode: convert string in array separated with ,
         $relations = explode(',',request('included'));
         $allowIcluded = collect($this->allowIncluded);
 
@@ -55,7 +56,7 @@ class Category extends Model
     public function scopeSort (Builder $query){
         if(empty($this->allowSort) ||empty(request('sort'))){
             return;                 
-        }
+        }        
         $sortFields = explode(',',request('sort'));
     }
 }
