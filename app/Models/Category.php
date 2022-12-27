@@ -15,7 +15,7 @@ class Category extends Model
         'name',
         'slug'
     ];
-
+    //comment from machetazo
     protected $allowIncluded = ['posts','posts.user'];
     protected $allowFilter = ['id','name','slug'];
     protected $allowSort = ['id','name','slug'];
