@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
@@ -21,8 +22,9 @@ class CategoryController extends Controller
         $category = Category::included()
                     ->filter()
                     ->sort()
-                    ->get();
-        return $category;
+                    ->getOrPaginate();
+        //much information use collection method
+        return CategoryResource::collection($category);
     }
 
     /**
@@ -52,11 +54,13 @@ class CategoryController extends Controller
     public function show($category)
     {
         // Example Scope:included(Builder $query)
+        //api.test o post.test
         // http://api.test/v1/categories/4?included=post
         // http://api.test/v1/categories/4?included=posts
         // http://api.test/v1/categories/4?included=posts.user
         $category = Category::included()->findOrFail($category);
-        return $category;
+        //few information use make method when one data
+        return CategoryResource::make($category);
     }
 
     /**

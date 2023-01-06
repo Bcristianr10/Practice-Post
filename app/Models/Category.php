@@ -58,5 +58,25 @@ class Category extends Model
             return;                 
         }        
         $sortFields = explode(',',request('sort'));
+        $allowSort = collect($this->allowSort);
+        foreach ($sortFields as $sortField) {
+            $direction = 'asc';
+            if (substr($sortField,0,1) == '-') {
+                $direction = 'desc';
+                $sortField = substr($sortField,1);
+            }
+            if ($allowSort->contains($sortField)) {
+                $query->orderBy($sortField, $direction);
+            }            
+        }
+    }
+    public function scopeGetOrPaginate (Builder $query){
+        if(request('perPage')){
+            $perPage = intval(request('perPage'));
+            if($perPage){
+                return $query->paginate($perPage);
+            }
+        }
+        return $query->get();
     }
 }
