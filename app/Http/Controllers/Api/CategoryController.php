@@ -42,7 +42,7 @@ class CategoryController extends Controller
 
         $category = Category::create($request->all());
 
-        return $category;
+        return CategoryResource::make($category);
     }
 
     /**
@@ -58,9 +58,9 @@ class CategoryController extends Controller
         // http://api.test/v1/categories/4?included=post
         // http://api.test/v1/categories/4?included=posts
         // http://api.test/v1/categories/4?included=posts.user
-        $category = Category::included()->findOrFail($category);
+        $categorys = Category::included()->findOrFail($category);
         //few information use make method when one data
-        return CategoryResource::make($category);
+        return CategoryResource::make($categorys);
     }
 
     /**
@@ -79,7 +79,7 @@ class CategoryController extends Controller
 
         $category->update($request->all());
 
-        return $category;
+        return CategoryResource::make($category);
     }
 
     /**
@@ -92,6 +92,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return $category;
+        return CategoryResource::make($category);
     }
 }

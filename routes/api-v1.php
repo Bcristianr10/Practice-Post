@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,4 @@ Route::post('register',[RegisterController::class,'store'])->name('api.v1.regist
 // Route::delete('categories/{category}',[CategoryController::class,'destroy'])->name('api.v1.categories.destroy');
 
 Route::apiResource('categories',CategoryController::class)->names('api.v1.categories'); 
+Route::apiResource('posts',PostController::class)->names('api.v1.posts'); 
